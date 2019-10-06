@@ -3,6 +3,7 @@ package com.botmasterzzz.mobile.config;
 import liquibase.integration.spring.SpringLiquibase;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
@@ -58,7 +59,9 @@ public class ApplicationConfig implements WebApplicationInitializer {
         return dataSource;
     }
 
+
     @Bean
+    @Qualifier("email")
     public Session email() {
         String username = environment.getProperty("mail.user");
         String password = environment.getProperty("mail.password");
@@ -69,12 +72,13 @@ public class ApplicationConfig implements WebApplicationInitializer {
         prop.put("mail.smtp.port", "25");
         prop.put("mail.smtp.ssl.trust", "smtp.yandex.com");
         prop.put("mail.mime.charset", "utf-8");
-        return Session.getInstance(prop, new Authenticator() {
+        Session session = Session.getInstance(prop, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }
         });
+        return session;
     }
 
     @Bean
@@ -116,6 +120,7 @@ public class ApplicationConfig implements WebApplicationInitializer {
     }
 
     @Bean
+    @Qualifier("restTemplate")
     public RestOperations restTemplate() {
         return new RestTemplate();
     }
