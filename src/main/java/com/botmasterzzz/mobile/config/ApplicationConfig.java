@@ -59,7 +59,6 @@ public class ApplicationConfig implements WebApplicationInitializer {
     }
 
     @Bean
-    @Scope("prototype")
     public Session email() {
         String username = environment.getProperty("mail.user");
         String password = environment.getProperty("mail.password");
