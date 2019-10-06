@@ -59,28 +59,6 @@ public class ApplicationConfig implements WebApplicationInitializer {
         return dataSource;
     }
 
-
-    @Bean
-    @Qualifier("email")
-    public Session email() {
-        String username = environment.getProperty("mail.user");
-        String password = environment.getProperty("mail.password");
-        Properties prop = new Properties();
-        prop.put("mail.smtp.auth", true);
-        prop.put("mail.smtp.starttls.enable", "true");
-        prop.put("mail.smtp.host", "smtp.yandex.com");
-        prop.put("mail.smtp.port", "25");
-        prop.put("mail.smtp.ssl.trust", "smtp.yandex.com");
-        prop.put("mail.mime.charset", "utf-8");
-        Session session = Session.getInstance(prop, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
-        });
-        return session;
-    }
-
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
@@ -120,7 +98,6 @@ public class ApplicationConfig implements WebApplicationInitializer {
     }
 
     @Bean
-    @Qualifier("restTemplate")
     public RestOperations restTemplate() {
         return new RestTemplate();
     }

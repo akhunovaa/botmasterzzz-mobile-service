@@ -5,18 +5,15 @@ import com.botmasterzzz.mobile.exception.InvalidReCaptchaException;
 import com.botmasterzzz.mobile.service.CaptchaService;
 import com.botmasterzzz.mobile.service.ReCaptchaAttemptService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.springframework.web.client.RestOperations;
+import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.util.regex.Pattern;
 
 @Service
-@Profile({"local", "dev"})
 public class CaptchaServiceImplementation implements CaptchaService {
 
     private static Pattern RESPONSE_PATTERN = Pattern.compile("[A-Za-z0-9_-]+");
@@ -26,10 +23,6 @@ public class CaptchaServiceImplementation implements CaptchaService {
 
     @Value("${google.recaptcha.key.secret}")
     private String secretKeySecret;
-
-    @Autowired
-    @Qualifier("restTemplate")
-    private RestOperations restTemplate;
 
     @Autowired
     private ReCaptchaAttemptService reCaptchaAttemptService;
@@ -45,7 +38,7 @@ public class CaptchaServiceImplementation implements CaptchaService {
                 "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s&remoteip=%s",
                 secretKeySecret, response, clientIp));
 
-        GoogleResponse googleResponse = restTemplate.getForObject(verifyUri, GoogleResponse.class);
+        GoogleResponse googleResponse = new RestTemplate().getForObject(verifyUri, GoogleResponse.class);
 
         if(!googleResponse.isSuccess()) {
             if(googleResponse.hasClientError()) {

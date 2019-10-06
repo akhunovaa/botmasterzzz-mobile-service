@@ -3,8 +3,7 @@ package com.botmasterzzz.mobile.controller;
 import com.botmasterzzz.mobile.dto.Feedback;
 import com.botmasterzzz.mobile.service.CaptchaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,14 +17,13 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
+import java.util.Properties;
 
 @RestController
-@Profile({"local", "dev"})
 public class FeedbackController extends AbstractController{
 
     @Autowired
-    @Qualifier("email")
-    private Session session;
+    private Environment environment;
 
     @Autowired
     private CaptchaService captchaService;
@@ -39,7 +37,7 @@ public class FeedbackController extends AbstractController{
         String response = feedback.getCaptchaToken();
         captchaService.processResponse(response, ipAddress);
         if (null != feedback.getName() && null != feedback.getPhone() && null != feedback.getMessage()) {
-            Message message = new MimeMessage(session);
+            Message message = new MimeMessage(email());
             message.setFrom(new InternetAddress("feedback@botmasterzzz.com"));
             message.setRecipients(
                     Message.RecipientType.TO, InternetAddress.parse("feedback@botmasterzzz.com"));
@@ -63,5 +61,24 @@ public class FeedbackController extends AbstractController{
             Transport.send(message);
         }
         return feedback;
+    }
+
+    private Session email() {
+        String username = environment.getProperty("mail.user");
+        String password = environment.getProperty("mail.password");
+        Properties prop = new Properties();
+        prop.put("mail.smtp.auth", true);
+        prop.put("mail.smtp.starttls.enable", "true");
+        prop.put("mail.smtp.host", "smtp.yandex.com");
+        prop.put("mail.smtp.port", "25");
+        prop.put("mail.smtp.ssl.trust", "smtp.yandex.com");
+        prop.put("mail.mime.charset", "utf-8");
+        Session session = Session.getInstance(prop, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+        return session;
     }
 }
