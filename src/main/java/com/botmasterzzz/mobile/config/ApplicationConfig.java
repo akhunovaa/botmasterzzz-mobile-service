@@ -3,7 +3,6 @@ package com.botmasterzzz.mobile.config;
 import liquibase.integration.spring.SpringLiquibase;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
@@ -20,9 +19,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import javax.mail.Authenticator;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
@@ -33,7 +29,6 @@ import java.util.concurrent.Executor;
 @EnableWebMvc
 @PropertySource("classpath:application.properties")
 @ComponentScan({"com.botmasterzzz.mobile"})
-@Profile({"local", "dev"})
 @EnableAsync
 public class ApplicationConfig implements WebApplicationInitializer {
 
