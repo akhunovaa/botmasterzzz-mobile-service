@@ -9,7 +9,7 @@ import java.util.Objects;
 public class UserWiFiDataEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -35,7 +35,7 @@ public class UserWiFiDataEntity {
     private String note;
 
     @JoinColumn(name = "device_id")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private UserDeviceEntity userDeviceEntity;
 
     @Column(name = "aud_when_create")

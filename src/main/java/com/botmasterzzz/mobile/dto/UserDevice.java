@@ -1,11 +1,9 @@
 package com.botmasterzzz.mobile.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -45,6 +43,17 @@ public class UserDevice {
 
     @JsonProperty("wifi_data")
     private List<UserWiFiData> userWiFiDataList;
+
+    @JsonIgnore
+    private long userId;
+
+    public void addUserWifiData(UserWiFiData userWiFiData) {
+        if (null == userWiFiDataList){
+            userWiFiDataList = new ArrayList<>();
+        }
+        userWiFiDataList.add(userWiFiData);
+    }
+
 
     public long getId() {
         return id;
@@ -110,6 +119,14 @@ public class UserDevice {
         this.userWiFiDataList = userWiFiDataList;
     }
 
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
     @Override
     public String toString() {
         return "UserDevice{" +
@@ -121,6 +138,7 @@ public class UserDevice {
                 ", whenCreated=" + whenCreated +
                 ", whenUpdated=" + whenUpdated +
                 ", userWiFiDataList=" + userWiFiDataList +
+                ", userId=" + userId +
                 '}';
     }
 }

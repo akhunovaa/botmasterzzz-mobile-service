@@ -20,7 +20,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 
-@EnableWebSecurity
+@EnableWebSecurity(debug = false)
 @Configuration
 @EnableGlobalMethodSecurity(
         securedEnabled = true,

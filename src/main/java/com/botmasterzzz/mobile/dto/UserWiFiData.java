@@ -1,16 +1,12 @@
 package com.botmasterzzz.mobile.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 
 import java.sql.Timestamp;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({
-        "data_id",
         "ssid",
         "bssid",
         "channel",
@@ -23,6 +19,7 @@ import java.sql.Timestamp;
 public class UserWiFiData {
 
     @JsonProperty("data_id")
+    @JsonIgnore
     private long id;
 
     @JsonProperty("ssid")

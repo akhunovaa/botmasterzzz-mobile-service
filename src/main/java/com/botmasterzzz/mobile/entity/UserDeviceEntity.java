@@ -4,15 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "user_device")
 public class UserDeviceEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -45,9 +44,10 @@ public class UserDeviceEntity {
     @OneToMany(
             mappedBy = "userDeviceEntity",
             cascade = CascadeType.ALL,
-            orphanRemoval = true
+            orphanRemoval = true,
+            fetch = FetchType.EAGER
     )
-    private List<UserWiFiDataEntity> userWiFiDataEntityList;
+    private Set<UserWiFiDataEntity> userWiFiDataEntityList;
 
     public void addUserWifiData(UserWiFiDataEntity userWiFiDataEntity) {
         userWiFiDataEntityList.add(userWiFiDataEntity);
@@ -131,11 +131,11 @@ public class UserDeviceEntity {
         this.audWhenUpdate = audWhenUpdate;
     }
 
-    public List<UserWiFiDataEntity> getUserWiFiDataEntityList() {
+    public Set<UserWiFiDataEntity> getUserWiFiDataEntityList() {
         return userWiFiDataEntityList;
     }
 
-    public void setUserWiFiDataEntityList(List<UserWiFiDataEntity> userWiFiDataEntityList) {
+    public void setUserWiFiDataEntityList(Set<UserWiFiDataEntity> userWiFiDataEntityList) {
         this.userWiFiDataEntityList = userWiFiDataEntityList;
     }
 
@@ -172,8 +172,4 @@ public class UserDeviceEntity {
                 Objects.equals(userWiFiDataEntityList, that.userWiFiDataEntityList);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, modelName, osVersion, macAddress, ipAddress, note, userEntity, audWhenCreate, audWhenUpdate, userWiFiDataEntityList);
-    }
 }

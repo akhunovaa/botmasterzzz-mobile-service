@@ -1,22 +1,21 @@
 package com.botmasterzzz.mobile.service;
 
 import com.botmasterzzz.mobile.dto.UserDevice;
+import com.botmasterzzz.mobile.exception.CustomException;
 
 import java.util.List;
 
 public interface WiFiDataService {
 
-    Long userDeviceAdd(UserDevice userDevice);
+    void userDeviceAdd(UserDevice userDevice) throws CustomException;
 
-    UserDevice userDeviceGet(long id);
+    List<UserDevice> getUserDeviceList() throws CustomException;
 
-    List<UserDevice> getUserDeviceList();
+    List<UserDevice> getUserDeviceList(long userId) throws CustomException;
 
-    List<UserDevice> getUserDeviceList(long userId);
+    void userDeviceDelete(long userId);
 
-    UserDevice userDeviceDelete(long userId);
+    void userDeviceDelete(UserDevice userDevice);
 
-    UserDevice userDeviceDelete(UserDevice userDevice);
-
-    UserDevice userDeviceUpdate(UserDevice userDevice);
+    void userDeviceUpdate(UserDevice userDevice);
 }
