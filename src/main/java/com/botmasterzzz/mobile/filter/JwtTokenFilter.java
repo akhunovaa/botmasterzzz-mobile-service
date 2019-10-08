@@ -1,7 +1,8 @@
 package com.botmasterzzz.mobile.filter;
 
 import com.botmasterzzz.mobile.provider.JwtTokenProvider;
-import org.springframework.beans.factory.annotation.Value;
+import com.botmasterzzz.mobile.util.BeanUtil;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
@@ -18,9 +19,6 @@ public class JwtTokenFilter extends GenericFilterBean {
 
     private JwtTokenProvider jwtTokenProvider;
 
-    @Value("${allow.origin}")
-    private boolean allowOrigin;
-
     public JwtTokenFilter(JwtTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
     }
@@ -28,6 +26,7 @@ public class JwtTokenFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain filterChain)
             throws IOException, ServletException {
+        boolean allowOrigin = Boolean.valueOf(BeanUtil.getBean(Environment.class).getProperty("allow.origin"));
         String token = jwtTokenProvider.resolveToken((HttpServletRequest) req);
         if (token != null && jwtTokenProvider.validateToken(token)) {
             Authentication auth = jwtTokenProvider.getAuthentication(token);
