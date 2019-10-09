@@ -64,4 +64,22 @@ public class WiFiDataController extends AbstractController {
         LOGGER.info("Request to WiFi data list done for {} with size {}", userId, userDeviceList.size());
         return getResponseDto(userDeviceList);
     }
+
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = "/full", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Response mobileWiFiDataGetFullList() {
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        UserPrincipal userPrincipal = (UserPrincipal) usernamePasswordAuthenticationToken.getPrincipal();
+        long userId = userPrincipal.getId();
+        LOGGER.info("Request to WiFi data list for {}", userId);
+        List<UserDevice> userDeviceList;
+        try{
+            userDeviceList = wiFiDataService.getUserDeviceList();
+        }catch (CustomException exception){
+            LOGGER.info("WiFi data list ERROR for {}", userId);
+            return getResponseDtoError(exception.getMessage());
+        }
+        LOGGER.info("Request to WiFi data list done for {} with size {}", userId, userDeviceList.size());
+        return getResponseDto(userDeviceList);
+    }
 }
