@@ -114,8 +114,8 @@ public class WifiDataServiceImpl implements WiFiDataService {
 
     @Async
     @Override
-    public void userDeviceDelete(long userId) {
-        userDeviceDAO.userDeviceDelete(userId);
+    public void userDeviceDelete(long deviceId) {
+        userDeviceDAO.userDeviceDelete(deviceId);
     }
 
     @Async

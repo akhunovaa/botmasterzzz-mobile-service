@@ -54,9 +54,9 @@ public class UserDeviceDAOImpl implements UserDeviceDAO {
     }
 
     @Override
-    public void userDeviceDelete(long userId) {
-        List<UserDeviceEntity> userDeviceEntityList = getUserDeviceList(userId);
-        for (UserDeviceEntity userDeviceEntity : userDeviceEntityList) {
+    public void userDeviceDelete(long deviceId) {
+        UserDeviceEntity userDeviceEntity = getUserDevice(deviceId);
+        if (null != userDeviceEntity){
             userDeviceDelete(userDeviceEntity);
         }
     }
@@ -77,5 +77,14 @@ public class UserDeviceDAOImpl implements UserDeviceDAO {
         session.update(userDevice);
         updateTransaction.commit();
         session.close();
+    }
+
+    private UserDeviceEntity getUserDevice(long deviceId) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        UserDeviceEntity userDeviceEntity = session.get(UserDeviceEntity.class, deviceId);
+        session.getTransaction().commit();
+        session.close();
+        return userDeviceEntity;
     }
 }

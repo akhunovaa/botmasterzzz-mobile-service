@@ -12,7 +12,7 @@ public interface UserDeviceDAO {
 
     List<UserDeviceEntity> getUserDeviceList(long userId);
 
-    void userDeviceDelete(long userId);
+    void userDeviceDelete(long deviceId);
 
     void userDeviceDelete(UserDeviceEntity userDevice);
 

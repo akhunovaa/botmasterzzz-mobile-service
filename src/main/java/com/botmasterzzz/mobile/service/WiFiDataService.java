@@ -13,7 +13,7 @@ public interface WiFiDataService {
 
     List<UserDevice> getUserDeviceList(long userId) throws CustomException;
 
-    void userDeviceDelete(long userId);
+    void userDeviceDelete(long deviceId) throws CustomException;
 
     void userDeviceDelete(UserDevice userDevice);
 

@@ -12,10 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -81,5 +78,23 @@ public class WiFiDataController extends AbstractController {
         }
         LOGGER.info("Request to WiFi data list done for {} with size {}", userId, userDeviceList.size());
         return getResponseDto(userDeviceList);
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = "/data/delete",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Response mobileWiFiDataPurge(@RequestParam(name = "device_id") Long deviceId) {
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        UserPrincipal userPrincipal = (UserPrincipal) usernamePasswordAuthenticationToken.getPrincipal();
+        long userId = userPrincipal.getId();
+        LOGGER.info("Request to WiFi data delete for {}", userId);
+        try{
+            wiFiDataService.userDeviceDelete(deviceId);
+        }catch (CustomException exception){
+            LOGGER.info("WiFi data delete ERROR for {}", userId);
+        }
+        LOGGER.info("Request to WiFi data delete done for {}", userId);
+        return getResponseDto("Successful");
     }
 }
