@@ -14,6 +14,7 @@ import java.util.List;
         "os_version",
         "mac_address",
         "ip_address",
+        "user",
         "wifi_data",
         "created",
         "changed"
@@ -34,6 +35,9 @@ public class UserDevice {
 
     @JsonProperty("ip_address")
     private String ipAddress;
+
+    @JsonProperty("user")
+    private User user;
 
     @JsonProperty("created")
     private Timestamp whenCreated;
@@ -127,6 +131,14 @@ public class UserDevice {
         this.userId = userId;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "UserDevice{" +
@@ -135,6 +147,7 @@ public class UserDevice {
                 ", osVersion='" + osVersion + '\'' +
                 ", macAddress='" + macAddress + '\'' +
                 ", ipAddress='" + ipAddress + '\'' +
+                ", user=" + user +
                 ", whenCreated=" + whenCreated +
                 ", whenUpdated=" + whenUpdated +
                 ", userWiFiDataList=" + userWiFiDataList +

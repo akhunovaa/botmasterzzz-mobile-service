@@ -1,6 +1,7 @@
 package com.botmasterzzz.mobile.service.impl;
 
 import com.botmasterzzz.mobile.dao.UserDeviceDAO;
+import com.botmasterzzz.mobile.dto.User;
 import com.botmasterzzz.mobile.dto.UserDevice;
 import com.botmasterzzz.mobile.dto.UserWiFiData;
 import com.botmasterzzz.mobile.entity.UserDeviceEntity;
@@ -62,6 +63,7 @@ public class WifiDataServiceImpl implements WiFiDataService {
             userDevice.setWhenCreated(userDeviceEntity.getAudWhenCreate());
             userDevice.setWhenUpdated(userDeviceEntity.getAudWhenUpdate());
             userDevice.setUserId(userDeviceEntity.getUserEntity().getId());
+            userDevice.setUser(new User(userDeviceEntity.getUserEntity().getLogin(), userDeviceEntity.getUserEntity().getEmail()));
             for (UserWiFiDataEntity userWiFiDataEntity : userDeviceEntity.getUserWiFiDataEntityList()) {
                 UserWiFiData userWiFiData = new UserWiFiData();
                 userWiFiData.setBssid(userWiFiDataEntity.getBssid());
@@ -94,6 +96,7 @@ public class WifiDataServiceImpl implements WiFiDataService {
             userDevice.setWhenCreated(userDeviceEntity.getAudWhenCreate());
             userDevice.setWhenUpdated(userDeviceEntity.getAudWhenUpdate());
             userDevice.setUserId(userDeviceEntity.getUserEntity().getId());
+            userDevice.setUser(new User(userDeviceEntity.getUserEntity().getLogin(), userDeviceEntity.getUserEntity().getEmail()));
             for (UserWiFiDataEntity userWiFiDataEntity : userDeviceEntity.getUserWiFiDataEntityList()) {
                 UserWiFiData userWiFiData = new UserWiFiData();
                 userWiFiData.setBssid(userWiFiDataEntity.getBssid());
