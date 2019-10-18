@@ -220,33 +220,4 @@ public class UserWiFiDataEntity {
                 ", audWhenUpdate=" + audWhenUpdate +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserWiFiDataEntity that = (UserWiFiDataEntity) o;
-        return primaryFrequency == that.primaryFrequency &&
-                centerFrequency == that.centerFrequency &&
-                endFrequency == that.endFrequency &&
-                is80211mc == that.is80211mc &&
-                Objects.equals(id, that.id) &&
-                Objects.equals(ssid, that.ssid) &&
-                Objects.equals(bssid, that.bssid) &&
-                Objects.equals(channel, that.channel) &&
-                Objects.equals(rssi, that.rssi) &&
-                Objects.equals(cc, that.cc) &&
-                Objects.equals(security, that.security) &&
-                Objects.equals(note, that.note) &&
-                Objects.equals(userDeviceEntity, that.userDeviceEntity) &&
-                Objects.equals(distance, that.distance) &&
-                Objects.equals(createdTime, that.createdTime) &&
-                Objects.equals(audWhenCreate, that.audWhenCreate) &&
-                Objects.equals(audWhenUpdate, that.audWhenUpdate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, ssid, bssid, channel, rssi, cc, security, note, userDeviceEntity, distance, primaryFrequency, centerFrequency, endFrequency, is80211mc, createdTime, audWhenCreate, audWhenUpdate);
-    }
 }

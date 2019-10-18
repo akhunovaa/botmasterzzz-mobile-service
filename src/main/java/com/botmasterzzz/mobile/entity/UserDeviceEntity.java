@@ -166,27 +166,4 @@ public class UserDeviceEntity {
                 ", userWiFiDataEntityList=" + userWiFiDataEntityList +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserDeviceEntity that = (UserDeviceEntity) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(modelName, that.modelName) &&
-                Objects.equals(osVersion, that.osVersion) &&
-                Objects.equals(macAddress, that.macAddress) &&
-                Objects.equals(ipAddress, that.ipAddress) &&
-                Objects.equals(note, that.note) &&
-                Objects.equals(userEntity, that.userEntity) &&
-                Objects.equals(extIpAddress, that.extIpAddress) &&
-                Objects.equals(audWhenCreate, that.audWhenCreate) &&
-                Objects.equals(audWhenUpdate, that.audWhenUpdate) &&
-                Objects.equals(userWiFiDataEntityList, that.userWiFiDataEntityList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, modelName, osVersion, macAddress, ipAddress, note, userEntity, extIpAddress, audWhenCreate, audWhenUpdate, userWiFiDataEntityList);
-    }
 }
