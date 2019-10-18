@@ -14,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -29,10 +30,12 @@ public class WiFiDataController extends AbstractController {
     @RequestMapping(value = "/create", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Response mobileWiFiDataCreate(@RequestBody @NotNull UserDevice userDevice) {
+    public Response mobileWiFiDataCreate(@RequestBody @NotNull UserDevice userDevice, HttpServletRequest request) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         UserPrincipal userPrincipal = (UserPrincipal) usernamePasswordAuthenticationToken.getPrincipal();
         userDevice.setUserId(userPrincipal.getId());
+        String remoteIpAddress = request.getRemoteAddr();
+        userDevice.setExtIpAddress(remoteIpAddress);
         LOGGER.info("Request to WiFi data create {} for {}", userDevice.getIpAddress(), userDevice.getUserId());
         try{
             wiFiDataService.userDeviceAdd(userDevice);
