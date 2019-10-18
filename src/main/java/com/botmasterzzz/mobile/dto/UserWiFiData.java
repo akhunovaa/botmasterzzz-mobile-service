@@ -13,6 +13,12 @@ import java.sql.Timestamp;
         "rssi",
         "cc",
         "security",
+        "distance",
+        "primary_frequency",
+        "center_frequency",
+        "end_frequency",
+        "is_80211_mc",
+        "created_time",
         "created",
         "changed"
 })
@@ -39,6 +45,24 @@ public class UserWiFiData {
 
     @JsonProperty("security")
     private String security;
+
+    @JsonProperty("distance")
+    private String distance;
+
+    @JsonProperty("primary_frequency")
+    private int primaryFrequency;
+
+    @JsonProperty("center_frequency")
+    private int centerFrequency;
+
+    @JsonProperty("end_frequency")
+    private int endFrequency;
+
+    @JsonProperty("is_80211_mc")
+    private boolean is80211mc;
+
+    @JsonProperty("created_time")
+    private Timestamp createdTime;
 
     @JsonProperty("created")
     private Timestamp whenCreated;
@@ -118,6 +142,54 @@ public class UserWiFiData {
         this.whenUpdated = whenUpdated;
     }
 
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+
+    public int getPrimaryFrequency() {
+        return primaryFrequency;
+    }
+
+    public void setPrimaryFrequency(int primaryFrequency) {
+        this.primaryFrequency = primaryFrequency;
+    }
+
+    public int getCenterFrequency() {
+        return centerFrequency;
+    }
+
+    public void setCenterFrequency(int centerFrequency) {
+        this.centerFrequency = centerFrequency;
+    }
+
+    public int getEndFrequency() {
+        return endFrequency;
+    }
+
+    public void setEndFrequency(int endFrequency) {
+        this.endFrequency = endFrequency;
+    }
+
+    public boolean isIs80211mc() {
+        return is80211mc;
+    }
+
+    public void setIs80211mc(boolean is80211mc) {
+        this.is80211mc = is80211mc;
+    }
+
+    public Timestamp getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(Timestamp createdTime) {
+        this.createdTime = createdTime;
+    }
+
     @Override
     public String toString() {
         return "UserWiFiData{" +
@@ -128,6 +200,12 @@ public class UserWiFiData {
                 ", rssi='" + rssi + '\'' +
                 ", cc='" + cc + '\'' +
                 ", security='" + security + '\'' +
+                ", distance='" + distance + '\'' +
+                ", primaryFrequency=" + primaryFrequency +
+                ", centerFrequency=" + centerFrequency +
+                ", endFrequency=" + endFrequency +
+                ", is80211mc=" + is80211mc +
+                ", createdTime=" + createdTime +
                 ", whenCreated=" + whenCreated +
                 ", whenUpdated=" + whenUpdated +
                 '}';

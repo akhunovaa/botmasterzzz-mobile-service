@@ -38,6 +38,24 @@ public class UserWiFiDataEntity {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private UserDeviceEntity userDeviceEntity;
 
+    @Column(name = "distance")
+    private String distance;
+
+    @Column(name = "primary_frequency")
+    private int primaryFrequency;
+
+    @Column(name = "center_frequency")
+    private int centerFrequency;
+
+    @Column(name = "end_frequency")
+    private int endFrequency;
+
+    @Column(name = "is_80211_mc")
+    private boolean is80211mc;
+
+    @Column(name = "created_time")
+    private Timestamp createdTime;
+
     @Column(name = "aud_when_create")
     private Timestamp audWhenCreate;
 
@@ -132,6 +150,54 @@ public class UserWiFiDataEntity {
         this.audWhenUpdate = audWhenUpdate;
     }
 
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+
+    public int getPrimaryFrequency() {
+        return primaryFrequency;
+    }
+
+    public void setPrimaryFrequency(int primaryFrequency) {
+        this.primaryFrequency = primaryFrequency;
+    }
+
+    public int getCenterFrequency() {
+        return centerFrequency;
+    }
+
+    public void setCenterFrequency(int centerFrequency) {
+        this.centerFrequency = centerFrequency;
+    }
+
+    public int getEndFrequency() {
+        return endFrequency;
+    }
+
+    public void setEndFrequency(int endFrequency) {
+        this.endFrequency = endFrequency;
+    }
+
+    public boolean isIs80211mc() {
+        return is80211mc;
+    }
+
+    public void setIs80211mc(boolean is80211mc) {
+        this.is80211mc = is80211mc;
+    }
+
+    public Timestamp getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(Timestamp createdTime) {
+        this.createdTime = createdTime;
+    }
+
     @Override
     public String toString() {
         return "UserWiFiDataEntity{" +
@@ -144,6 +210,12 @@ public class UserWiFiDataEntity {
                 ", security='" + security + '\'' +
                 ", note='" + note + '\'' +
                 ", userDeviceEntity=" + userDeviceEntity +
+                ", distance='" + distance + '\'' +
+                ", primaryFrequency=" + primaryFrequency +
+                ", centerFrequency=" + centerFrequency +
+                ", endFrequency=" + endFrequency +
+                ", is80211mc=" + is80211mc +
+                ", createdTime=" + createdTime +
                 ", audWhenCreate=" + audWhenCreate +
                 ", audWhenUpdate=" + audWhenUpdate +
                 '}';
@@ -154,7 +226,11 @@ public class UserWiFiDataEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserWiFiDataEntity that = (UserWiFiDataEntity) o;
-        return Objects.equals(id, that.id) &&
+        return primaryFrequency == that.primaryFrequency &&
+                centerFrequency == that.centerFrequency &&
+                endFrequency == that.endFrequency &&
+                is80211mc == that.is80211mc &&
+                Objects.equals(id, that.id) &&
                 Objects.equals(ssid, that.ssid) &&
                 Objects.equals(bssid, that.bssid) &&
                 Objects.equals(channel, that.channel) &&
@@ -163,12 +239,14 @@ public class UserWiFiDataEntity {
                 Objects.equals(security, that.security) &&
                 Objects.equals(note, that.note) &&
                 Objects.equals(userDeviceEntity, that.userDeviceEntity) &&
+                Objects.equals(distance, that.distance) &&
+                Objects.equals(createdTime, that.createdTime) &&
                 Objects.equals(audWhenCreate, that.audWhenCreate) &&
                 Objects.equals(audWhenUpdate, that.audWhenUpdate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ssid, bssid, channel, rssi, cc, security, note, userDeviceEntity, audWhenCreate, audWhenUpdate);
+        return Objects.hash(id, ssid, bssid, channel, rssi, cc, security, note, userDeviceEntity, distance, primaryFrequency, centerFrequency, endFrequency, is80211mc, createdTime, audWhenCreate, audWhenUpdate);
     }
 }

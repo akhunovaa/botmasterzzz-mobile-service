@@ -33,6 +33,7 @@ public class WifiDataServiceImpl implements WiFiDataService {
         userDeviceEntity.setMacAddress(userDevice.getMacAddress());
         userDeviceEntity.setModelName(userDevice.getModelName());
         userDeviceEntity.setOsVersion(userDevice.getOsVersion());
+        userDeviceEntity.setExtIpAddress(userDevice.getExtIpAddress());
         userDeviceEntity.setUserWiFiDataEntityList(new HashSet<>(userDevice.getUserWiFiDataList().size()));
         for (UserWiFiData userWiFiData : userDevice.getUserWiFiDataList()) {
             UserWiFiDataEntity userWiFiDataEntity = new UserWiFiDataEntity();
@@ -42,6 +43,12 @@ public class WifiDataServiceImpl implements WiFiDataService {
             userWiFiDataEntity.setRssi(userWiFiData.getRssi());
             userWiFiDataEntity.setSecurity(userWiFiData.getSecurity());
             userWiFiDataEntity.setSsid(userWiFiData.getSsid());
+            userWiFiDataEntity.setDistance(userWiFiData.getDistance());
+            userWiFiDataEntity.setPrimaryFrequency(userWiFiData.getPrimaryFrequency());
+            userWiFiDataEntity.setCenterFrequency(userWiFiData.getCenterFrequency());
+            userWiFiDataEntity.setEndFrequency(userWiFiData.getEndFrequency());
+            userWiFiDataEntity.setIs80211mc(userWiFiData.isIs80211mc());
+            userWiFiDataEntity.setCreatedTime(userWiFiData.getCreatedTime());
             userDeviceEntity.addUserWifiData(userWiFiDataEntity);
         }
         userDeviceEntity.setUserEntity(userEntity);
@@ -60,6 +67,7 @@ public class WifiDataServiceImpl implements WiFiDataService {
             userDevice.setMacAddress(userDeviceEntity.getMacAddress());
             userDevice.setModelName(userDeviceEntity.getModelName());
             userDevice.setOsVersion(userDeviceEntity.getOsVersion());
+            userDevice.setExtIpAddress(userDeviceEntity.getExtIpAddress());
             userDevice.setWhenCreated(userDeviceEntity.getAudWhenCreate());
             userDevice.setWhenUpdated(userDeviceEntity.getAudWhenUpdate());
             userDevice.setUserId(userDeviceEntity.getUserEntity().getId());
@@ -73,6 +81,12 @@ public class WifiDataServiceImpl implements WiFiDataService {
                 userWiFiData.setRssi(userWiFiDataEntity.getRssi());
                 userWiFiData.setSecurity(userWiFiDataEntity.getSecurity());
                 userWiFiData.setSsid(userWiFiDataEntity.getSsid());
+                userWiFiData.setDistance(userWiFiDataEntity.getDistance());
+                userWiFiData.setPrimaryFrequency(userWiFiDataEntity.getPrimaryFrequency());
+                userWiFiData.setCenterFrequency(userWiFiDataEntity.getCenterFrequency());
+                userWiFiData.setEndFrequency(userWiFiDataEntity.getEndFrequency());
+                userWiFiData.setIs80211mc(userWiFiDataEntity.isIs80211mc());
+                userWiFiData.setCreatedTime(userWiFiDataEntity.getCreatedTime());
                 userWiFiData.setWhenCreated(userWiFiDataEntity.getAudWhenCreate());
                 userWiFiData.setWhenUpdated(userWiFiDataEntity.getAudWhenUpdate());
                 userDevice.addUserWifiData(userWiFiData);
@@ -93,6 +107,7 @@ public class WifiDataServiceImpl implements WiFiDataService {
             userDevice.setMacAddress(userDeviceEntity.getMacAddress());
             userDevice.setModelName(userDeviceEntity.getModelName());
             userDevice.setOsVersion(userDeviceEntity.getOsVersion());
+            userDevice.setExtIpAddress(userDeviceEntity.getExtIpAddress());
             userDevice.setWhenCreated(userDeviceEntity.getAudWhenCreate());
             userDevice.setWhenUpdated(userDeviceEntity.getAudWhenUpdate());
             userDevice.setUserId(userDeviceEntity.getUserEntity().getId());
@@ -106,6 +121,12 @@ public class WifiDataServiceImpl implements WiFiDataService {
                 userWiFiData.setRssi(userWiFiDataEntity.getRssi());
                 userWiFiData.setSecurity(userWiFiDataEntity.getSecurity());
                 userWiFiData.setSsid(userWiFiDataEntity.getSsid());
+                userWiFiData.setDistance(userWiFiDataEntity.getDistance());
+                userWiFiData.setPrimaryFrequency(userWiFiDataEntity.getPrimaryFrequency());
+                userWiFiData.setCenterFrequency(userWiFiDataEntity.getCenterFrequency());
+                userWiFiData.setEndFrequency(userWiFiDataEntity.getEndFrequency());
+                userWiFiData.setIs80211mc(userWiFiDataEntity.isIs80211mc());
+                userWiFiData.setCreatedTime(userWiFiDataEntity.getCreatedTime());
                 userWiFiData.setWhenCreated(userWiFiDataEntity.getAudWhenCreate());
                 userWiFiData.setWhenUpdated(userWiFiDataEntity.getAudWhenUpdate());
                 userDevice.addUserWifiData(userWiFiData);
@@ -155,6 +176,7 @@ public class WifiDataServiceImpl implements WiFiDataService {
         userDeviceEntity.setIpAddress(userDevice.getIpAddress());
         userDeviceEntity.setMacAddress(userDevice.getMacAddress());
         userDeviceEntity.setModelName(userDevice.getModelName());
+        userDeviceEntity.setExtIpAddress(userDevice.getExtIpAddress());
         userDeviceEntity.setOsVersion(userDevice.getOsVersion());
         userDeviceEntity.setUserWiFiDataEntityList(new HashSet<>(userDevice.getUserWiFiDataList().size()));
         for (UserWiFiData userWiFiData : userDevice.getUserWiFiDataList()) {
@@ -165,6 +187,12 @@ public class WifiDataServiceImpl implements WiFiDataService {
             userWiFiDataEntity.setRssi(userWiFiData.getRssi());
             userWiFiDataEntity.setSecurity(userWiFiData.getSecurity());
             userWiFiDataEntity.setSsid(userWiFiData.getSsid());
+            userWiFiDataEntity.setDistance(userWiFiData.getDistance());
+            userWiFiDataEntity.setPrimaryFrequency(userWiFiData.getPrimaryFrequency());
+            userWiFiDataEntity.setCenterFrequency(userWiFiData.getCenterFrequency());
+            userWiFiDataEntity.setEndFrequency(userWiFiData.getEndFrequency());
+            userWiFiDataEntity.setIs80211mc(userWiFiData.isIs80211mc());
+            userWiFiDataEntity.setCreatedTime(userWiFiData.getCreatedTime());
             userDeviceEntity.addUserWifiData(userWiFiDataEntity);
         }
         userDeviceEntity.setUserEntity(userEntity);

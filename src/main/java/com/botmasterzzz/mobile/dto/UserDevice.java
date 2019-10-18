@@ -15,6 +15,7 @@ import java.util.List;
         "mac_address",
         "ip_address",
         "user",
+        "ext_ip_address",
         "wifi_data",
         "created",
         "changed"
@@ -38,6 +39,9 @@ public class UserDevice {
 
     @JsonProperty("user")
     private User user;
+
+    @JsonProperty("ext_ip_address")
+    private String extIpAddress;
 
     @JsonProperty("created")
     private Timestamp whenCreated;
@@ -139,6 +143,14 @@ public class UserDevice {
         this.user = user;
     }
 
+    public String getExtIpAddress() {
+        return extIpAddress;
+    }
+
+    public void setExtIpAddress(String extIpAddress) {
+        this.extIpAddress = extIpAddress;
+    }
+
     @Override
     public String toString() {
         return "UserDevice{" +
@@ -148,6 +160,7 @@ public class UserDevice {
                 ", macAddress='" + macAddress + '\'' +
                 ", ipAddress='" + ipAddress + '\'' +
                 ", user=" + user +
+                ", extIpAddress='" + extIpAddress + '\'' +
                 ", whenCreated=" + whenCreated +
                 ", whenUpdated=" + whenUpdated +
                 ", userWiFiDataList=" + userWiFiDataList +

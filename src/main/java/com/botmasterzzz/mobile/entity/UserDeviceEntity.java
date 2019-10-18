@@ -34,6 +34,9 @@ public class UserDeviceEntity {
     @OneToOne(cascade = CascadeType.REFRESH)
     private UserEntity userEntity;
 
+    @Column(name = "ext_ip_address")
+    private String extIpAddress;
+
     @Column(name = "aud_when_create")
     private Timestamp audWhenCreate;
 
@@ -139,6 +142,14 @@ public class UserDeviceEntity {
         this.userWiFiDataEntityList = userWiFiDataEntityList;
     }
 
+    public String getExtIpAddress() {
+        return extIpAddress;
+    }
+
+    public void setExtIpAddress(String extIpAddress) {
+        this.extIpAddress = extIpAddress;
+    }
+
     @Override
     public String toString() {
         return "UserDeviceEntity{" +
@@ -149,6 +160,7 @@ public class UserDeviceEntity {
                 ", ipAddress='" + ipAddress + '\'' +
                 ", note='" + note + '\'' +
                 ", userEntity=" + userEntity +
+                ", extIpAddress='" + extIpAddress + '\'' +
                 ", audWhenCreate=" + audWhenCreate +
                 ", audWhenUpdate=" + audWhenUpdate +
                 ", userWiFiDataEntityList=" + userWiFiDataEntityList +
@@ -167,9 +179,14 @@ public class UserDeviceEntity {
                 Objects.equals(ipAddress, that.ipAddress) &&
                 Objects.equals(note, that.note) &&
                 Objects.equals(userEntity, that.userEntity) &&
+                Objects.equals(extIpAddress, that.extIpAddress) &&
                 Objects.equals(audWhenCreate, that.audWhenCreate) &&
                 Objects.equals(audWhenUpdate, that.audWhenUpdate) &&
                 Objects.equals(userWiFiDataEntityList, that.userWiFiDataEntityList);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, modelName, osVersion, macAddress, ipAddress, note, userEntity, extIpAddress, audWhenCreate, audWhenUpdate, userWiFiDataEntityList);
+    }
 }
