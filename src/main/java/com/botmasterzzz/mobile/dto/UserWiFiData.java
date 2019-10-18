@@ -58,7 +58,7 @@ public class UserWiFiData {
     @JsonProperty("end_frequency")
     private int endFrequency;
 
-    @JsonProperty("is_80211_mc")
+    @JsonProperty("is80211mc")
     private boolean is80211mc;
 
     @JsonProperty("created_time")
