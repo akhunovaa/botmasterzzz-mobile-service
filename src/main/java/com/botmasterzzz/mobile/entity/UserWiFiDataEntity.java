@@ -2,7 +2,6 @@ package com.botmasterzzz.mobile.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Objects;
 
 @Entity
 @Table(name = "user_wifi_data")
@@ -42,13 +41,13 @@ public class UserWiFiDataEntity {
     private String distance;
 
     @Column(name = "primary_frequency")
-    private int primaryFrequency;
+    private Integer primaryFrequency;
 
     @Column(name = "center_frequency")
-    private int centerFrequency;
+    private Integer centerFrequency;
 
     @Column(name = "end_frequency")
-    private int endFrequency;
+    private Integer endFrequency;
 
     @Column(name = "is_80211_mc")
     private boolean is80211mc;
@@ -158,27 +157,27 @@ public class UserWiFiDataEntity {
         this.distance = distance;
     }
 
-    public int getPrimaryFrequency() {
+    public Integer getPrimaryFrequency() {
         return primaryFrequency;
     }
 
-    public void setPrimaryFrequency(int primaryFrequency) {
+    public void setPrimaryFrequency(Integer primaryFrequency) {
         this.primaryFrequency = primaryFrequency;
     }
 
-    public int getCenterFrequency() {
+    public Integer getCenterFrequency() {
         return centerFrequency;
     }
 
-    public void setCenterFrequency(int centerFrequency) {
+    public void setCenterFrequency(Integer centerFrequency) {
         this.centerFrequency = centerFrequency;
     }
 
-    public int getEndFrequency() {
+    public Integer getEndFrequency() {
         return endFrequency;
     }
 
-    public void setEndFrequency(int endFrequency) {
+    public void setEndFrequency(Integer endFrequency) {
         this.endFrequency = endFrequency;
     }
 
