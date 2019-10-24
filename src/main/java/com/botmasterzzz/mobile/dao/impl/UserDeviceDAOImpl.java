@@ -40,11 +40,12 @@ public class UserDeviceDAOImpl implements UserDeviceDAO {
 
     @Override
     @SuppressWarnings({"deprecation"})
-    public UserDeviceEntity getUserDevice(String macAddress) {
+    public UserDeviceEntity getUserDevice(String macAddress, Long userId) {
         UserDeviceEntity userDeviceEntity;
         Session session = sessionFactory.openSession();
         Criteria criteria = session.createCriteria(UserDeviceEntity.class);
         criteria.add(Restrictions.eq("macAddress", macAddress));
+        criteria.add(Restrictions.eq("userEntity.id", userId));
         criteria.addOrder(Order.asc("audWhenCreate"));
         userDeviceEntity = (UserDeviceEntity) criteria.list().get(0);
         session.close();

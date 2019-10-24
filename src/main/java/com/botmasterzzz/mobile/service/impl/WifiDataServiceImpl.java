@@ -65,7 +65,7 @@ public class WifiDataServiceImpl implements WiFiDataService {
         UserDeviceNetTestEntity userDeviceNetTestEntity = new UserDeviceNetTestEntity();
         userDeviceNetTestEntity.setRate(userDeviceNetTest.getRate());
         userDeviceNetTestEntity.setSent(userDeviceNetTest.getSent());
-        UserDeviceEntity userDeviceEntity = userDeviceDAO.getUserDevice(userDeviceNetTest.getMacddress());
+        UserDeviceEntity userDeviceEntity = userDeviceDAO.getUserDevice(userDeviceNetTest.getMacddress(), userDeviceNetTest.getUserId());
         userDeviceNetTestEntity.setUserDeviceEntity(userDeviceEntity);
         userDeviceDAO.userDeviceNetTestAdd(userDeviceNetTestEntity);
     }

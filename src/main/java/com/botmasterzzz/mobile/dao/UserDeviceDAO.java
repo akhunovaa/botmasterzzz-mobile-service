@@ -13,7 +13,7 @@ public interface UserDeviceDAO {
 
     List<UserDeviceEntity> getUserDeviceList();
 
-    UserDeviceEntity getUserDevice(String macAddress);
+    UserDeviceEntity getUserDevice(String macAddress, Long userId);
 
     List<UserDeviceEntity> getUserDeviceList(long userId);
 
