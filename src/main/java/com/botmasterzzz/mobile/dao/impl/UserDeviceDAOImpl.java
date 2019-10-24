@@ -46,7 +46,7 @@ public class UserDeviceDAOImpl implements UserDeviceDAO {
         Criteria criteria = session.createCriteria(UserDeviceEntity.class);
         criteria.add(Restrictions.eq("macAddress", macAddress));
         criteria.addOrder(Order.asc("audWhenCreate"));
-        userDeviceEntity = (UserDeviceEntity) criteria.uniqueResult();
+        userDeviceEntity = (UserDeviceEntity) criteria.list().get(0);
         session.close();
         return userDeviceEntity;
 
