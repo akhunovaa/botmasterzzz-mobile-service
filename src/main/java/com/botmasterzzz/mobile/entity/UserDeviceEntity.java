@@ -30,6 +30,9 @@ public class UserDeviceEntity {
     @Column(name = "note")
     private String note;
 
+    @Column(name = "link_speed")
+    private Integer linkSpeed;
+
     @JoinColumn(name = "user_id")
     @OneToOne(cascade = CascadeType.REFRESH)
     private UserEntity userEntity;
@@ -150,6 +153,14 @@ public class UserDeviceEntity {
         this.extIpAddress = extIpAddress;
     }
 
+    public Integer getLinkSpeed() {
+        return linkSpeed;
+    }
+
+    public void setLinkSpeed(Integer linkSpeed) {
+        this.linkSpeed = linkSpeed;
+    }
+
     @Override
     public String toString() {
         return "UserDeviceEntity{" +
@@ -159,6 +170,7 @@ public class UserDeviceEntity {
                 ", macAddress='" + macAddress + '\'' +
                 ", ipAddress='" + ipAddress + '\'' +
                 ", note='" + note + '\'' +
+                ", linkSpeed=" + linkSpeed +
                 ", userEntity=" + userEntity +
                 ", extIpAddress='" + extIpAddress + '\'' +
                 ", audWhenCreate=" + audWhenCreate +

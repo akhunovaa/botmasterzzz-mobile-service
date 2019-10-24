@@ -21,4 +21,10 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="0019_user_device_addColumn" failOnError="true" author="azat.akhunov@protonmail.com" runOnChange="true">
+        <addColumn schemaName="public" tableName="user_device">
+            <column name="link_speed" type="integer"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

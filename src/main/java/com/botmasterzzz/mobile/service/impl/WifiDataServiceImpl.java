@@ -35,6 +35,7 @@ public class WifiDataServiceImpl implements WiFiDataService {
         userDeviceEntity.setOsVersion(userDevice.getOsVersion());
         userDeviceEntity.setExtIpAddress(userDevice.getExtIpAddress());
         userDeviceEntity.setUserWiFiDataEntityList(new HashSet<>(userDevice.getUserWiFiDataList().size()));
+        userDeviceEntity.setLinkSpeed(userDevice.getLinkSpeed());
         for (UserWiFiData userWiFiData : userDevice.getUserWiFiDataList()) {
             UserWiFiDataEntity userWiFiDataEntity = new UserWiFiDataEntity();
             userWiFiDataEntity.setBssid(userWiFiData.getBssid());
@@ -71,6 +72,7 @@ public class WifiDataServiceImpl implements WiFiDataService {
             userDevice.setWhenCreated(userDeviceEntity.getAudWhenCreate());
             userDevice.setWhenUpdated(userDeviceEntity.getAudWhenUpdate());
             userDevice.setUserId(userDeviceEntity.getUserEntity().getId());
+            userDevice.setLinkSpeed(userDeviceEntity.getLinkSpeed());
             userDevice.setUser(new User(userDeviceEntity.getUserEntity().getLogin(), userDeviceEntity.getUserEntity().getEmail()));
             for (UserWiFiDataEntity userWiFiDataEntity : userDeviceEntity.getUserWiFiDataEntityList()) {
                 UserWiFiData userWiFiData = new UserWiFiData();
@@ -111,6 +113,7 @@ public class WifiDataServiceImpl implements WiFiDataService {
             userDevice.setWhenCreated(userDeviceEntity.getAudWhenCreate());
             userDevice.setWhenUpdated(userDeviceEntity.getAudWhenUpdate());
             userDevice.setUserId(userDeviceEntity.getUserEntity().getId());
+            userDevice.setLinkSpeed(userDeviceEntity.getLinkSpeed());
             userDevice.setUser(new User(userDeviceEntity.getUserEntity().getLogin(), userDeviceEntity.getUserEntity().getEmail()));
             for (UserWiFiDataEntity userWiFiDataEntity : userDeviceEntity.getUserWiFiDataEntityList()) {
                 UserWiFiData userWiFiData = new UserWiFiData();

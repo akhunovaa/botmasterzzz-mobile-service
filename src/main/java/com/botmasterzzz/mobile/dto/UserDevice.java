@@ -16,6 +16,7 @@ import java.util.List;
         "ip_address",
         "user",
         "ext_ip_address",
+        "link_speed",
         "wifi_data",
         "created",
         "changed"
@@ -42,6 +43,9 @@ public class UserDevice {
 
     @JsonProperty("ext_ip_address")
     private String extIpAddress;
+
+    @JsonProperty("link_speed")
+    private Integer linkSpeed;
 
     @JsonProperty("created")
     private Timestamp whenCreated;
@@ -151,6 +155,14 @@ public class UserDevice {
         this.extIpAddress = extIpAddress;
     }
 
+    public Integer getLinkSpeed() {
+        return linkSpeed;
+    }
+
+    public void setLinkSpeed(Integer linkSpeed) {
+        this.linkSpeed = linkSpeed;
+    }
+
     @Override
     public String toString() {
         return "UserDevice{" +
@@ -161,6 +173,7 @@ public class UserDevice {
                 ", ipAddress='" + ipAddress + '\'' +
                 ", user=" + user +
                 ", extIpAddress='" + extIpAddress + '\'' +
+                ", linkSpeed=" + linkSpeed +
                 ", whenCreated=" + whenCreated +
                 ", whenUpdated=" + whenUpdated +
                 ", userWiFiDataList=" + userWiFiDataList +
