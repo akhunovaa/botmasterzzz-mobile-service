@@ -42,4 +42,19 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="1_user_wifi_net_test" failOnError="false" author="azat.akhunov@protonmail.com" runOnChange="true">
+        <createTable tableName="user_wifi_net_test" schemaName="public">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="sent" type="VARCHAR(255)"/>
+            <column name="rate" type="VARCHAR(255)"/>
+            <column name="device_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_device" referencedTableName="user_device" referencedColumnNames="id"/>
+            </column>
+            <column name="aud_when_create" type="TIMESTAMP"/>
+            <column name="aud_when_update" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>

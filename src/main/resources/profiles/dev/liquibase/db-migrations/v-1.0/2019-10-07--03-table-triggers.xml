@@ -24,4 +24,15 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="2_user_wifi_net_test" failOnError="true" author="azat.akhunov@protonmail.com" runOnChange="true">
+        <sql>
+            DROP TRIGGER IF EXISTS user_wifi_net_test_aud_trigger ON user_wifi_net_test;
+            CREATE TRIGGER user_wifi_net_test_aud_trigger BEFORE INSERT OR UPDATE ON user_wifi_net_test FOR EACH ROW EXECUTE PROCEDURE aud_trigger();
+        </sql>
+        <rollback>
+            DROP TRIGGER user_wifi_net_test_aud_trigger ON user_wifi_net_test;
+        </rollback>
+    </changeSet>
+
+
 </databaseChangeLog>

@@ -56,6 +56,10 @@ public class UserDevice {
     @JsonProperty("wifi_data")
     private List<UserWiFiData> userWiFiDataList;
 
+    @JsonProperty("net_test")
+    private List<UserDeviceNetTest> userDeviceNetTestList;
+
+
     @JsonIgnore
     private long userId;
 
@@ -64,6 +68,13 @@ public class UserDevice {
             userWiFiDataList = new ArrayList<>();
         }
         userWiFiDataList.add(userWiFiData);
+    }
+
+    public void addUserNetTestData(UserDeviceNetTest userDeviceNetTest) {
+        if (null == userDeviceNetTestList){
+            userDeviceNetTestList = new ArrayList<>();
+        }
+        userDeviceNetTestList.add(userDeviceNetTest);
     }
 
 
@@ -163,6 +174,14 @@ public class UserDevice {
         this.linkSpeed = linkSpeed;
     }
 
+    public List<UserDeviceNetTest> getUserDeviceNetTestList() {
+        return userDeviceNetTestList;
+    }
+
+    public void setUserDeviceNetTestList(List<UserDeviceNetTest> userDeviceNetTestList) {
+        this.userDeviceNetTestList = userDeviceNetTestList;
+    }
+
     @Override
     public String toString() {
         return "UserDevice{" +
@@ -177,6 +196,7 @@ public class UserDevice {
                 ", whenCreated=" + whenCreated +
                 ", whenUpdated=" + whenUpdated +
                 ", userWiFiDataList=" + userWiFiDataList +
+                ", userDeviceNetTestList=" + userDeviceNetTestList +
                 ", userId=" + userId +
                 '}';
     }

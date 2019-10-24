@@ -1,8 +1,6 @@
 package com.botmasterzzz.mobile.controller;
 
-import com.botmasterzzz.mobile.dto.Response;
-import com.botmasterzzz.mobile.dto.UserDevice;
-import com.botmasterzzz.mobile.dto.UserPrincipal;
+import com.botmasterzzz.mobile.dto.*;
 import com.botmasterzzz.mobile.exception.CustomException;
 import com.botmasterzzz.mobile.service.WiFiDataService;
 import org.slf4j.Logger;
@@ -45,6 +43,25 @@ public class WiFiDataController extends AbstractController {
         }
         LOGGER.info("WiFi data created {} for {}", userDevice.getIpAddress(), userDevice.getUserId());
         return getResponseDto(userDevice);
+    }
+
+    @PreAuthorize("authenticated")
+    @RequestMapping(value = "/test", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Response mobileNetTestCreate(@RequestBody @NotNull UserDeviceNetTest userDeviceNetTest, HttpServletRequest request) {
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        UserPrincipal userPrincipal = (UserPrincipal) usernamePasswordAuthenticationToken.getPrincipal();
+        userDeviceNetTest.setUserId(userPrincipal.getId());
+        LOGGER.info("Request to WiFi net test create {} for {}", userDeviceNetTest.getRate(), userDeviceNetTest.getUserId());
+        try{
+            wiFiDataService.userNetTestAdd(userDeviceNetTest);
+        }catch (CustomException exception){
+            LOGGER.info("WiFi data create ERROR {} for {}", userDeviceNetTest.getRate(), userDeviceNetTest.getUserId());
+            return getResponseDtoError(exception.getMessage());
+        }
+        LOGGER.info("WiFi data created {} for {}", userDeviceNetTest.getRate(), userDeviceNetTest.getUserId());
+        return getResponseDto(userDeviceNetTest);
     }
 
     @PreAuthorize("authenticated")

@@ -55,9 +55,23 @@ public class UserDeviceEntity {
     )
     private Set<UserWiFiDataEntity> userWiFiDataEntityList;
 
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "userDeviceEntity",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER
+    )
+    private Set<UserDeviceNetTestEntity> userDeviceNetTestEntitySet;
+
     public void addUserWifiData(UserWiFiDataEntity userWiFiDataEntity) {
         userWiFiDataEntityList.add(userWiFiDataEntity);
         userWiFiDataEntity.setUserDeviceEntity(this);
+    }
+
+    public void addUserDeviceTestData(UserDeviceNetTestEntity userDeviceNetTestEntity) {
+        userDeviceNetTestEntitySet.add(userDeviceNetTestEntity);
+        userDeviceNetTestEntity.setUserDeviceEntity(this);
     }
 
     public void removeComment(UserWiFiDataEntity userWiFiDataEntity) {
@@ -161,6 +175,14 @@ public class UserDeviceEntity {
         this.linkSpeed = linkSpeed;
     }
 
+    public Set<UserDeviceNetTestEntity> getUserDeviceNetTestEntitySet() {
+        return userDeviceNetTestEntitySet;
+    }
+
+    public void setUserDeviceNetTestEntitySet(Set<UserDeviceNetTestEntity> userDeviceNetTestEntitySet) {
+        this.userDeviceNetTestEntitySet = userDeviceNetTestEntitySet;
+    }
+
     @Override
     public String toString() {
         return "UserDeviceEntity{" +
@@ -176,6 +198,7 @@ public class UserDeviceEntity {
                 ", audWhenCreate=" + audWhenCreate +
                 ", audWhenUpdate=" + audWhenUpdate +
                 ", userWiFiDataEntityList=" + userWiFiDataEntityList +
+                ", userDeviceNetTestEntitySet=" + userDeviceNetTestEntitySet +
                 '}';
     }
 }

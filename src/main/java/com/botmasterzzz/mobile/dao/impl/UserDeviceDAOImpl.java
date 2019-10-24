@@ -2,10 +2,12 @@ package com.botmasterzzz.mobile.dao.impl;
 
 import com.botmasterzzz.mobile.dao.UserDeviceDAO;
 import com.botmasterzzz.mobile.entity.UserDeviceEntity;
+import com.botmasterzzz.mobile.entity.UserDeviceNetTestEntity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,6 +27,29 @@ public class UserDeviceDAOImpl implements UserDeviceDAO {
         session.save(userDeviceEntity);
         session.getTransaction().commit();
         session.close();
+    }
+
+    @Override
+    public void userDeviceNetTestAdd(UserDeviceNetTestEntity userDeviceNetTestEntity) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.save(userDeviceNetTestEntity);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
+    @SuppressWarnings({"deprecation"})
+    public UserDeviceEntity getUserDevice(String macAddress) {
+        UserDeviceEntity userDeviceEntity;
+        Session session = sessionFactory.openSession();
+        Criteria criteria = session.createCriteria(UserDeviceEntity.class);
+        criteria.add(Restrictions.eq("macAddress", macAddress));
+        criteria.addOrder(Order.asc("audWhenCreate"));
+        userDeviceEntity = (UserDeviceEntity) criteria.uniqueResult();
+        session.close();
+        return userDeviceEntity;
+
     }
 
     @Override

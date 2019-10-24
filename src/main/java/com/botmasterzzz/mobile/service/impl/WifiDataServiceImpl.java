@@ -3,10 +3,13 @@ package com.botmasterzzz.mobile.service.impl;
 import com.botmasterzzz.mobile.dao.UserDeviceDAO;
 import com.botmasterzzz.mobile.dto.User;
 import com.botmasterzzz.mobile.dto.UserDevice;
+import com.botmasterzzz.mobile.dto.UserDeviceNetTest;
 import com.botmasterzzz.mobile.dto.UserWiFiData;
 import com.botmasterzzz.mobile.entity.UserDeviceEntity;
+import com.botmasterzzz.mobile.entity.UserDeviceNetTestEntity;
 import com.botmasterzzz.mobile.entity.UserEntity;
 import com.botmasterzzz.mobile.entity.UserWiFiDataEntity;
+import com.botmasterzzz.mobile.exception.CustomException;
 import com.botmasterzzz.mobile.service.WiFiDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -58,6 +61,16 @@ public class WifiDataServiceImpl implements WiFiDataService {
     }
 
     @Override
+    public void userNetTestAdd(UserDeviceNetTest userDeviceNetTest) throws CustomException {
+        UserDeviceNetTestEntity userDeviceNetTestEntity = new UserDeviceNetTestEntity();
+        userDeviceNetTestEntity.setRate(userDeviceNetTest.getRate());
+        userDeviceNetTestEntity.setSent(userDeviceNetTest.getSent());
+        UserDeviceEntity userDeviceEntity = userDeviceDAO.getUserDevice(userDeviceNetTest.getMacddress());
+        userDeviceNetTestEntity.setUserDeviceEntity(userDeviceEntity);
+        userDeviceDAO.userDeviceNetTestAdd(userDeviceNetTestEntity);
+    }
+
+    @Override
     public List<UserDevice> getUserDeviceList() {
         List<UserDeviceEntity> userDeviceEntityList = userDeviceDAO.getUserDeviceList();
         List<UserDevice> userDeviceList = new ArrayList<>(userDeviceEntityList.size());
@@ -92,6 +105,15 @@ public class WifiDataServiceImpl implements WiFiDataService {
                 userWiFiData.setWhenCreated(userWiFiDataEntity.getAudWhenCreate());
                 userWiFiData.setWhenUpdated(userWiFiDataEntity.getAudWhenUpdate());
                 userDevice.addUserWifiData(userWiFiData);
+            }
+            for (UserDeviceNetTestEntity userDeviceNetTestEntity : userDeviceEntity.getUserDeviceNetTestEntitySet()) {
+                UserDeviceNetTest userDeviceNetTest = new UserDeviceNetTest();
+                userDeviceNetTest.setRate(userDeviceNetTestEntity.getRate());
+                userDeviceNetTest.setSent(userDeviceNetTestEntity.getSent());
+                userDeviceNetTest.setId(userDeviceNetTestEntity.getId());
+                userDeviceNetTest.setWhenCreated(userDeviceNetTestEntity.getAudWhenCreate());
+                userDeviceNetTest.setWhenUpdated(userDeviceNetTestEntity.getAudWhenUpdate());
+                userDevice.addUserNetTestData(userDeviceNetTest);
             }
             userDeviceList.add(userDevice);
         }
@@ -133,6 +155,15 @@ public class WifiDataServiceImpl implements WiFiDataService {
                 userWiFiData.setWhenCreated(userWiFiDataEntity.getAudWhenCreate());
                 userWiFiData.setWhenUpdated(userWiFiDataEntity.getAudWhenUpdate());
                 userDevice.addUserWifiData(userWiFiData);
+            }
+            for (UserDeviceNetTestEntity userDeviceNetTestEntity : userDeviceEntity.getUserDeviceNetTestEntitySet()) {
+                UserDeviceNetTest userDeviceNetTest = new UserDeviceNetTest();
+                userDeviceNetTest.setRate(userDeviceNetTestEntity.getRate());
+                userDeviceNetTest.setSent(userDeviceNetTestEntity.getSent());
+                userDeviceNetTest.setId(userDeviceNetTestEntity.getId());
+                userDeviceNetTest.setWhenCreated(userDeviceNetTestEntity.getAudWhenCreate());
+                userDeviceNetTest.setWhenUpdated(userDeviceNetTestEntity.getAudWhenUpdate());
+                userDevice.addUserNetTestData(userDeviceNetTest);
             }
             userDeviceList.add(userDevice);
         }
