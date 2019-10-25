@@ -60,6 +60,7 @@ public class UserDeviceDAOImpl implements UserDeviceDAO {
         Session session = sessionFactory.openSession();
         Criteria criteria = session.createCriteria(UserDeviceEntity.class);
         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        criteria.addOrder(Order.asc("audWhenCreate"));
         userDeviceEntityList = criteria.list();
         session.close();
         return userDeviceEntityList;
@@ -72,6 +73,7 @@ public class UserDeviceDAOImpl implements UserDeviceDAO {
         Session session = sessionFactory.openSession();
         Criteria criteria = session.createCriteria(UserDeviceEntity.class);
         criteria.add(Restrictions.eq("userEntity.id", userId));
+        criteria.addOrder(Order.asc("audWhenCreate"));
         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         userDeviceEntityList = criteria.list();
         session.close();
