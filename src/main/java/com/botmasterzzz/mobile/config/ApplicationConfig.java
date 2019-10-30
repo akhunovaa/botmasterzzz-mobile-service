@@ -1,16 +1,15 @@
 package com.botmasterzzz.mobile.config;
 
-import liquibase.integration.spring.SpringLiquibase;
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig;
 import org.jasypt.spring.properties.EncryptablePropertyPlaceholderConfigurer;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.lang.NonNull;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.client.RestOperations;
