@@ -55,6 +55,7 @@
         <sonar.maven.version>3.6.0.1398</sonar.maven.version>
         <logstash-logback-encoder.version>5.2</logstash-logback-encoder.version>
         <slf4j.version>1.7.25</slf4j.version>
+        <jasyp.version>1.7</jasyp.version>
     </properties>
 
     <profiles>
@@ -426,6 +427,13 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>27.0.1-jre</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+            <version>${jasyp.version}</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
