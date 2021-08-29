@@ -85,7 +85,7 @@ public class ApplicationConfig implements WebApplicationInitializer {
     public EnvironmentStringPBEConfig environmentVariablesConfiguration() {
         EnvironmentStringPBEConfig environmentStringPBEConfig = new EnvironmentStringPBEConfig();
         environmentStringPBEConfig.setAlgorithm("PBEWithMD5AndDES");
-        environmentStringPBEConfig.setPassword("710713748");
+        environmentStringPBEConfig.setPassword("");
         return environmentStringPBEConfig;
     }
 
