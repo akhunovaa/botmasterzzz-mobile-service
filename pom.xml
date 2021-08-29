@@ -14,10 +14,6 @@
             <email>azat.akhunov@protonmail.com</email>
             <name>Azat Akhunov</name>
         </developer>
-        <developer>
-            <email>shamraeviy@me.com</email>
-            <name>Ilya Shamraev</name>
-        </developer>
     </developers>
 
     <properties>
