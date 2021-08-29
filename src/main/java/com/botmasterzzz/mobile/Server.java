@@ -4,7 +4,7 @@ import org.apache.catalina.startup.Tomcat;
 
 public class Server {
 
-    private static final int DEFAULT_PORT = 8066;
+    private static final int DEFAULT_PORT = 8016;
     private final Tomcat tomcat;
 
     public static void main(String[] args) throws Exception {
